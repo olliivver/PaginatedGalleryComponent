@@ -5,11 +5,13 @@ import { useState, useEffect, useRef } from "react";
 import Pagination from "./Paginate";
 
 const Gallery = () => {
+  const IMGWIDTH = 200;
+  const MARGINS = 200;
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
 
   const area = windowSize.current[0] * windowSize.current[1];
   const onResize = () => {
-    setImagesPerPage((windowSize.current[0] * windowSize.current[1]) / 125400);
+    setImagesPerPage((windowSize.current[0] * windowSize.current[1]) / calc(IMGWIDTH + MARGINS));
   };
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const Gallery = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [imagesPerPage, setImagesPerPage] = useState(Math.floor(area / 125400));
+  const [imagesPerPage, setImagesPerPage] = useState(Math.floor(area / calc(IMGWIDTH + MARGINS)));
 
   useEffect(() => {
     if (imageArray.length > 0) {
